@@ -1,14 +1,21 @@
-import 'amount.dart';
+import 'package:flutter_beer_app/features/beer_list/data/models/beer/ingredients/amount.dart';
+import 'package:flutter_beer_app/features/beer_list/domain/entities/beer/ingredients/malt.dart';
 
-//TODO domain level should contain entities, while data level should contain models
-class Malt {
-  String? name;
-  Amount? amount;
+class MaltModel extends Malt {
+  const MaltModel({String? name, AmountModel? amount})
+      : super(name: name, amount: amount);
 
-  Malt({this.name, this.amount});
+  factory MaltModel.fromJson(Map<String, dynamic> json) {
+    return MaltModel(
+      name: json['name'],
+      amount: AmountModel.fromJson(json['amount']),
+    );
+  }
 
-  Malt.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    amount = json['amount'] != null ? Amount.fromJson(json['amount']) : null;
+  factory MaltModel.fromEntity(Malt? entity) {
+    return MaltModel(
+      name: entity?.name,
+      amount: AmountModel.fromEntity(entity?.amount),
+    );
   }
 }

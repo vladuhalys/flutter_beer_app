@@ -1,20 +1,31 @@
-import 'hop.dart';
-import 'malt.dart';
+import 'package:flutter_beer_app/features/beer_list/data/models/beer/ingredients/hop.dart';
+import 'package:flutter_beer_app/features/beer_list/data/models/beer/ingredients/malt.dart';
+import 'package:flutter_beer_app/features/beer_list/domain/entities/beer/ingredients/ingredient.dart';
 
-//TODO domain level should contain entities, while data level should contain models
-class Ingredients {
-  List<Malt>? malt;
-  List<Hop>? hops;
-  String? yeast;
+class IngredientsModel extends Ingredients {
+  const IngredientsModel({
+    List<MaltModel>? malt,
+    List<HopModel>? hops,
+    String? yeast,
+  }) : super(malt: malt, hops: hops, yeast: yeast);
 
-  Ingredients({this.malt, this.hops, this.yeast});
+  factory IngredientsModel.fromJson(Map<String, dynamic> json) {
+    return IngredientsModel(
+      malt: json['malt'] != null
+          ? List<MaltModel>.from(json['malt'].map((x) => MaltModel.fromJson(x)))
+          : null,
+      hops: json['hops'] != null
+          ? List<HopModel>.from(json['hops'].map((x) => HopModel.fromJson(x)))
+          : null,
+      yeast: json['yeast'],
+    );
+  }
 
-  Ingredients.fromJson(Map<String, dynamic> json)
-      : malt = json['malt'] != null
-            ? (json['malt'] as List).map((i) => Malt.fromJson(i)).toList()
-            : null,
-        hops = json['hops'] != null
-            ? (json['hops'] as List).map((i) => Hop.fromJson(i)).toList()
-            : null,
-        yeast = json['yeast'];
+  factory IngredientsModel.fromEntity(Ingredients? entity) {
+    return IngredientsModel(
+      malt: entity?.malt?.map((e) => MaltModel.fromEntity(e)).toList(),
+      hops: entity?.hops?.map((e) => HopModel.fromEntity(e)).toList(),
+      yeast: entity?.yeast,
+    );
+  }
 }

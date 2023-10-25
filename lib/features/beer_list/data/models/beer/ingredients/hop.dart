@@ -1,18 +1,26 @@
-import 'amount.dart';
+import 'package:flutter_beer_app/features/beer_list/data/models/beer/ingredients/amount.dart';
+import 'package:flutter_beer_app/features/beer_list/domain/entities/beer/ingredients/hop.dart';
 
-//TODO domain level should contain entities, while data level should contain models
-class Hop {
-  String? name;
-  Amount? amount;
-  String? add;
-  String? attribute;
+class HopModel extends Hop {
+  const HopModel(
+      {String? name, AmountModel? amount, String? add, String? attribute})
+      : super(name: name, amount: amount, add: add, attribute: attribute);
 
-  Hop({this.name, this.amount, this.add, this.attribute});
+  factory HopModel.fromJson(Map<String, dynamic> json) {
+    return HopModel(
+      name: json['name'],
+      amount: AmountModel.fromJson(json['amount']),
+      add: json['add'],
+      attribute: json['attribute'],
+    );
+  }
 
-  Hop.fromJson(Map<String, dynamic> json)
-      : name = json['name'],
-        amount =
-            json['amount'] != null ? Amount.fromJson(json['amount']) : null,
-        add = json['add'],
-        attribute = json['attribute'];
+  factory HopModel.fromEntity(Hop? entity) {
+    return HopModel(
+      name: entity?.name,
+      amount: AmountModel.fromEntity(entity?.amount),
+      add: entity?.add,
+      attribute: entity?.attribute,
+    );
+  }
 }

@@ -1,14 +1,21 @@
-import 'temp.dart';
+import 'package:flutter_beer_app/features/beer_list/data/models/beer/method/temp.dart';
+import 'package:flutter_beer_app/features/beer_list/domain/entities/beer/method/mash_temp.dart';
 
-//TODO domain level should contain entities, while data level should contain models
-class MashTemp {
-  Temp? temp;
-  int? duration;
+class MashTempModel extends MashTemp {
+  const MashTempModel({TempModel? temp, int? duration})
+      : super(temp: temp, duration: duration);
 
-  MashTemp({this.temp, this.duration});
+  factory MashTempModel.fromJson(Map<String, dynamic> json) {
+    return MashTempModel(
+      temp: json['temp'] != null ? TempModel.fromJson(json['temp']) : null,
+      duration: json['duration'],
+    );
+  }
 
-  MashTemp.fromJson(Map<String, dynamic> json) {
-    temp = json['temp'] != null ? Temp.fromJson(json['temp']) : null;
-    duration = json['duration'];
+  factory MashTempModel.fromEntity(MashTemp? entity) {
+    return MashTempModel(
+      temp: entity?.temp != null ? TempModel.fromEntity(entity?.temp) : null,
+      duration: entity?.duration,
+    );
   }
 }

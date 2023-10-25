@@ -1,13 +1,19 @@
-//TODO domain level should contain entities, while data level should contain models
+import 'package:flutter_beer_app/features/beer_list/domain/entities/beer/method/temp.dart';
 
-class Temp {
-  int? value;
-  String? unit;
+class TempModel extends Temp {
+  const TempModel({int? value, String? unit}) : super(value: value, unit: unit);
 
-  Temp({this.value, this.unit});
+  factory TempModel.fromJson(Map<String, dynamic> json) {
+    return TempModel(
+      value: json['value'],
+      unit: json['unit'],
+    );
+  }
 
-  Temp.fromJson(Map<String, dynamic> json) {
-    value = json['value'];
-    unit = json['unit'];
+  factory TempModel.fromEntity(Temp? entity) {
+    return TempModel(
+      value: entity?.value,
+      unit: entity?.unit,
+    );
   }
 }

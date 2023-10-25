@@ -1,24 +1,36 @@
-import 'fermentation.dart';
-import 'mash_temp.dart';
+import 'package:flutter_beer_app/features/beer_list/data/models/beer/method/fermentation.dart';
+import 'package:flutter_beer_app/features/beer_list/data/models/beer/method/mash_temp.dart';
+import 'package:flutter_beer_app/features/beer_list/domain/entities/beer/method/method.dart';
 
-//TODO domain level should contain entities, while data level should contain models
-class Method {
-  Fermentation? fermentation;
-  List<MashTemp>? mashTemp;
-  Object? twist;
+class MethodModel extends Method {
+  const MethodModel(
+      {List<MashTempModel>? mashTemp,
+      FermentationModel? fermentation,
+      Object? twist})
+      : super(mashTemp: mashTemp, fermentation: fermentation, twist: twist);
 
-  Method({this.fermentation, this.mashTemp, this.twist});
+  factory MethodModel.fromJson(Map<String, dynamic> json) {
+    return MethodModel(
+      mashTemp: json['mash_temp'] != null
+          ? (json['mash_temp'] as List)
+              .map((e) => MashTempModel.fromJson(e))
+              .toList()
+          : null,
+      fermentation: json['fermentation'] != null
+          ? FermentationModel.fromJson(json['fermentation'])
+          : null,
+      twist: json['twist'],
+    );
+  }
 
-  Method.fromJson(Map<String, dynamic> json) {
-    fermentation = json['fermentation'] != null
-        ? Fermentation.fromJson(json['fermentation'])
-        : null;
-    if (json['mash_temp'] != null) {
-      mashTemp = <MashTemp>[];
-      json['mash_temp'].forEach((v) {
-        mashTemp!.add(MashTemp.fromJson(v));
-      });
-    }
-    twist = json['twist'];
+  factory MethodModel.fromEntity(Method? entity) {
+    return MethodModel(
+      mashTemp:
+          entity?.mashTemp?.map((e) => MashTempModel.fromEntity(e)).toList(),
+      fermentation: entity?.fermentation != null
+          ? FermentationModel.fromEntity(entity?.fermentation)
+          : null,
+      twist: entity?.twist,
+    );
   }
 }

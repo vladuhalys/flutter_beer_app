@@ -1,12 +1,18 @@
-import 'temp.dart';
+import 'package:flutter_beer_app/features/beer_list/data/models/beer/method/temp.dart';
+import 'package:flutter_beer_app/features/beer_list/domain/entities/beer/method/fermentation.dart';
 
-//TODO domain level should contain entities, while data level should contain models
-class Fermentation {
-  Temp? temp;
+class FermentationModel extends Fermentation {
+  const FermentationModel({TempModel? temp}) : super(temp: temp);
 
-  Fermentation({this.temp});
+  factory FermentationModel.fromJson(Map<String, dynamic> json) {
+    return FermentationModel(
+      temp: json['temp'] != null ? TempModel.fromJson(json['temp']) : null,
+    );
+  }
 
-  Fermentation.fromJson(Map<String, dynamic> json) {
-    temp = json['temp'] != null ? Temp.fromJson(json['temp']) : null;
+  factory FermentationModel.fromEntity(Fermentation? entity) {
+    return FermentationModel(
+      temp: entity?.temp != null ? TempModel.fromEntity(entity?.temp) : null,
+    );
   }
 }
