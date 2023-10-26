@@ -1,5 +1,5 @@
-import 'package:flutter_beer_app/features/beer_list/data/models/beer/method/temp.dart';
-import 'package:flutter_beer_app/features/beer_list/domain/entities/beer/method/mash_temp.dart';
+import 'package:flutter_beer_app/features/data/models/beer/method/temp.dart';
+import 'package:flutter_beer_app/features/domain/entities/beer/method/mash_temp.dart';
 
 class MashTempModel extends MashTemp {
   const MashTempModel({TempModel? temp, int? duration})

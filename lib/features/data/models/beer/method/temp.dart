@@ -1,4 +1,4 @@
-import 'package:flutter_beer_app/features/beer_list/domain/entities/beer/method/temp.dart';
+import 'package:flutter_beer_app/features/domain/entities/beer/method/temp.dart';
 
 class TempModel extends Temp {
   const TempModel({int? value, String? unit}) : super(value: value, unit: unit);

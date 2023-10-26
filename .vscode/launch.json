@@ -1,0 +1,43 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "flutter_beer_app DEV",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_dev.dart",
+            "args": [
+                "--dart-define",
+                "BEER_API=https://api.punkapi.com/v2/beers",
+                "--dart-define",
+                "APP_MODE=DEV"
+              ]
+        },
+        {
+            "name": "flutter_beer_app PROFILE",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile",
+            "program": "lib/main_profile.dart",
+            "args": [
+                "--dart-define",
+                "BEER_API=https://api.punkapi.com/v2/beers",
+                "--dart-define",
+                "APP_MODE=PROFILE"
+              ]
+        },
+        {
+            "name": "flutter_beer_app PROD",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release",
+            "program": "lib/main_prod.dart",
+            "args": [
+                "--dart-define",
+                "BEER_API=https://api.punkapi.com/v2/beers",
+                "--dart-define",
+                "APP_MODE=PROD"
+              ]
+        }
+    ]
+}

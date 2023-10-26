@@ -1,6 +1,6 @@
-import 'package:flutter_beer_app/features/beer_list/data/models/beer/ingredients/hop.dart';
-import 'package:flutter_beer_app/features/beer_list/data/models/beer/ingredients/malt.dart';
-import 'package:flutter_beer_app/features/beer_list/domain/entities/beer/ingredients/ingredient.dart';
+import 'package:flutter_beer_app/features/data/models/beer/ingredients/hop.dart';
+import 'package:flutter_beer_app/features/data/models/beer/ingredients/malt.dart';
+import 'package:flutter_beer_app/features/domain/entities/beer/ingredients/ingredient.dart';
 
 class IngredientsModel extends Ingredients {
   const IngredientsModel({

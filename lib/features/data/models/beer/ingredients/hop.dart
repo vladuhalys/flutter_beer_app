@@ -1,5 +1,5 @@
-import 'package:flutter_beer_app/features/beer_list/data/models/beer/ingredients/amount.dart';
-import 'package:flutter_beer_app/features/beer_list/domain/entities/beer/ingredients/hop.dart';
+import 'package:flutter_beer_app/features/data/models/beer/ingredients/amount.dart';
+import 'package:flutter_beer_app/features/domain/entities/beer/ingredients/hop.dart';
 
 class HopModel extends Hop {
   const HopModel(

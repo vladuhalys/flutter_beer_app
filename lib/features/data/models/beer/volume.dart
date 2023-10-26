@@ -1,4 +1,4 @@
-import 'package:flutter_beer_app/features/beer_list/domain/entities/beer/volume.dart';
+import 'package:flutter_beer_app/features/domain/entities/beer/volume.dart';
 
 class VolumeModel extends Volume {
   const VolumeModel({int? value, String? unit})

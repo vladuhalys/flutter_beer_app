@@ -1,8 +1,6 @@
-import 'package:flutter_beer_app/features/beer_list/data/models/beer/boil_volume.dart';
-import 'package:flutter_beer_app/features/beer_list/data/models/beer/ingredients/ingredient.dart';
-import 'package:flutter_beer_app/features/beer_list/data/models/beer/method/method.dart';
-import 'package:flutter_beer_app/features/beer_list/data/models/beer/volume.dart';
-import 'package:flutter_beer_app/features/beer_list/domain/entities/beer/beer.dart';
+import 'package:flutter_beer_app/features/domain/entities/beer/beer.dart';
+
+import 'beer_models_exports.dart';
 
 class BeerModel extends Beer {
   const BeerModel(

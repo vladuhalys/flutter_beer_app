@@ -1,4 +1,4 @@
-import 'package:flutter_beer_app/features/beer_list/domain/entities/beer/ingredients/amount.dart';
+import 'package:flutter_beer_app/features/domain/entities/beer/ingredients/amount.dart';
 
 class AmountModel extends Amount {
   const AmountModel({double? value, String? unit})

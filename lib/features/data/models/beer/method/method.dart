@@ -1,6 +1,6 @@
-import 'package:flutter_beer_app/features/beer_list/data/models/beer/method/fermentation.dart';
-import 'package:flutter_beer_app/features/beer_list/data/models/beer/method/mash_temp.dart';
-import 'package:flutter_beer_app/features/beer_list/domain/entities/beer/method/method.dart';
+import 'package:flutter_beer_app/features/data/models/beer/method/fermentation.dart';
+import 'package:flutter_beer_app/features/data/models/beer/method/mash_temp.dart';
+import 'package:flutter_beer_app/features/domain/entities/beer/method/method.dart';
 
 class MethodModel extends Method {
   const MethodModel(

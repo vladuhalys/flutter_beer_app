@@ -1,5 +1,5 @@
-import 'package:flutter_beer_app/features/beer_list/data/models/beer/method/temp.dart';
-import 'package:flutter_beer_app/features/beer_list/domain/entities/beer/method/fermentation.dart';
+import 'package:flutter_beer_app/features/data/models/beer/method/temp.dart';
+import 'package:flutter_beer_app/features/domain/entities/beer/method/fermentation.dart';
 
 class FermentationModel extends Fermentation {
   const FermentationModel({TempModel? temp}) : super(temp: temp);
