@@ -8,7 +8,7 @@
             "program": "lib/main_dev.dart",
             "args": [
                 "--dart-define",
-                "BEER_API=https://api.punkapi.com/v2/beers",
+                "BEER_API_DEV=https://api.punkapi.com/v2/beers",
                 "--dart-define",
                 "APP_MODE=DEV"
               ]
@@ -21,7 +21,7 @@
             "program": "lib/main_profile.dart",
             "args": [
                 "--dart-define",
-                "BEER_API=https://api.punkapi.com/v2/beers",
+                "BEER_API_PROFILE=https://api.punkapi.com/v2/beers",
                 "--dart-define",
                 "APP_MODE=PROFILE"
               ]
@@ -34,7 +34,7 @@
             "program": "lib/main_prod.dart",
             "args": [
                 "--dart-define",
-                "BEER_API=https://api.punkapi.com/v2/beers",
+                "BEER_API_PROD=https://api.punkapi.com/v2/beers",
                 "--dart-define",
                 "APP_MODE=PROD"
               ]

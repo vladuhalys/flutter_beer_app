@@ -1,8 +1,11 @@
+import 'package:flutter_beer_app/core/base/interface_model.dart';
+import 'package:flutter_beer_app/core/constants/constants.dart';
 import 'package:flutter_beer_app/features/domain/entities/beer/boil_volume.dart';
 
-class BoilVolumeModel extends BoilVolume {
-  const BoilVolumeModel({int? value, String? unit})
-      : super(value: value, unit: unit);
+class BoilVolumeModel implements IModel<BoilVolumeEntity> {
+  final int? value;
+  final String? unit;
+  const BoilVolumeModel({this.value, this.unit});
 
   factory BoilVolumeModel.fromJson(Map<String, dynamic> json) {
     return BoilVolumeModel(
@@ -11,10 +14,18 @@ class BoilVolumeModel extends BoilVolume {
     );
   }
 
-  factory BoilVolumeModel.fromEntity(BoilVolume entity) {
+  factory BoilVolumeModel.fromEntity(BoilVolumeEntity entity) {
     return BoilVolumeModel(
       value: entity.value,
       unit: entity.unit,
+    );
+  }
+
+  @override
+  BoilVolumeEntity convertToEntity() {
+    return BoilVolumeEntity(
+      value: value ?? Constants.unknownInt,
+      unit: unit ?? Constants.unknownString,
     );
   }
 }

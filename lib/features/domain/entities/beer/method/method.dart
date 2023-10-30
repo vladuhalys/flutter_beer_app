@@ -3,13 +3,23 @@ import 'package:equatable/equatable.dart';
 import 'fermentation.dart';
 import 'mash_temp.dart';
 
-class Method extends Equatable {
-  final Fermentation? fermentation;
-  final List<MashTemp>? mashTemp;
-  final Object? twist;
+class MethodEntity extends Equatable {
+  final FermentationEntity fermentation;
+  final List<MashTempEntity> mashTemp;
+  final Object twist;
 
-  const Method({this.fermentation, this.mashTemp, this.twist});
+  const MethodEntity(
+      {required this.fermentation,
+      required this.mashTemp,
+      required this.twist});
 
   @override
   List<Object?> get props => [fermentation, mashTemp, twist];
+
+  factory MethodEntity.empty() {
+    return MethodEntity(
+        fermentation: FermentationEntity.empty(),
+        mashTemp: [MashTempEntity.empty()],
+        twist: Object());
+  }
 }

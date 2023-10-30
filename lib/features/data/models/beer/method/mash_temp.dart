@@ -1,9 +1,12 @@
+import 'package:flutter_beer_app/core/base/interface_model.dart';
 import 'package:flutter_beer_app/features/data/models/beer/method/temp.dart';
 import 'package:flutter_beer_app/features/domain/entities/beer/method/mash_temp.dart';
+import 'package:flutter_beer_app/features/domain/entities/beer/method/temp.dart';
 
-class MashTempModel extends MashTemp {
-  const MashTempModel({TempModel? temp, int? duration})
-      : super(temp: temp, duration: duration);
+class MashTempModel implements IModel<MashTempEntity> {
+  final TempModel? temp;
+  final int? duration;
+  const MashTempModel({this.temp, this.duration});
 
   factory MashTempModel.fromJson(Map<String, dynamic> json) {
     return MashTempModel(
@@ -12,10 +15,18 @@ class MashTempModel extends MashTemp {
     );
   }
 
-  factory MashTempModel.fromEntity(MashTemp? entity) {
+  factory MashTempModel.fromEntity(MashTempEntity entity) {
     return MashTempModel(
-      temp: entity?.temp != null ? TempModel.fromEntity(entity?.temp) : null,
-      duration: entity?.duration,
+      temp: TempModel.fromEntity(entity.temp),
+      duration: entity.duration,
+    );
+  }
+  
+  @override
+  MashTempEntity convertToEntity() {
+    return MashTempEntity(
+      temp: temp?.convertToEntity() ?? TempEntity.empty(),
+      duration: duration ?? 0,
     );
   }
 }

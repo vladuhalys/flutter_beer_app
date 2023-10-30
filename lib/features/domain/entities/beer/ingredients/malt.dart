@@ -1,12 +1,17 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter_beer_app/core/constants/constants.dart';
 
 import 'amount.dart';
 
-class Malt extends Equatable {
-  final String? name;
-  final Amount? amount;
+class MaltEntity extends Equatable {
+  final String name;
+  final AmountEntity amount;
 
-  const Malt({this.name, this.amount});
+  const MaltEntity({required this.name, required this.amount});
+
+  factory MaltEntity.empty() {
+    return MaltEntity(name: Constants.unknownString, amount: AmountEntity.empty());
+  }
 
   @override
   List<Object?> get props => [name, amount];

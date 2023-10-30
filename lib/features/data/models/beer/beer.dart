@@ -1,50 +1,57 @@
+import 'package:flutter_beer_app/core/base/interface_model.dart';
+import 'package:flutter_beer_app/core/constants/constants.dart';
 import 'package:flutter_beer_app/features/domain/entities/beer/beer.dart';
+import 'package:flutter_beer_app/features/domain/entities/beer/boil_volume.dart';
+import 'package:flutter_beer_app/features/domain/entities/beer/ingredients/ingredient.dart';
+import 'package:flutter_beer_app/features/domain/entities/beer/method/method.dart';
+import 'package:flutter_beer_app/features/domain/entities/beer/volume.dart';
 
 import 'beer_models_exports.dart';
 
-class BeerModel extends Beer {
+class BeerModel implements IModel<BeerEntity> {
+  final int? id;
+  final String? name;
+  final String? tagline;
+  final String? firstBrewed;
+  final String? description;
+  final String? imageUrl;
+  final double? abv;
+  final double? ibu;
+  final double? targetFg;
+  final double? targetOg;
+  final double? ebc;
+  final double? srm;
+  final double? ph;
+  final double? attenuationLevel;
+  final VolumeModel? volume;
+  final BoilVolumeModel? boilVolume;
+
+  final MethodModel? method;
+  final IngredientsModel? ingredients;
+  final List<String>? foodPairing;
+  final String? brewersTips;
+
   const BeerModel(
-      {int? id,
-      String? name,
-      String? tagline,
-      String? firstBrewed,
-      String? description,
-      String? imageUrl,
-      double? abv,
-      double? ibu,
-      double? targetFg,
-      double? targetOg,
-      double? ebc,
-      double? srm,
-      double? ph,
-      double? attenuationLevel,
-      VolumeModel? volume,
-      BoilVolumeModel? boilVolume,
-      MethodModel? method,
-      IngredientsModel? ingredients,
-      List<String>? foodPairing,
-      String? brewersTips})
-      : super(
-            id: id,
-            name: name,
-            tagline: tagline,
-            firstBrewed: firstBrewed,
-            description: description,
-            imageUrl: imageUrl,
-            abv: abv,
-            ibu: ibu,
-            targetFg: targetFg,
-            targetOg: targetOg,
-            ebc: ebc,
-            srm: srm,
-            ph: ph,
-            attenuationLevel: attenuationLevel,
-            volume: volume,
-            boilVolume: boilVolume,
-            method: method,
-            ingredients: ingredients,
-            foodPairing: foodPairing,
-            brewersTips: brewersTips);
+      {this.id,
+      this.name,
+      this.tagline,
+      this.firstBrewed,
+      this.description,
+      this.imageUrl,
+      this.abv,
+      this.ibu,
+      this.targetFg,
+      this.targetOg,
+      this.ebc,
+      this.srm,
+      this.ph,
+      this.attenuationLevel,
+      this.volume,
+      this.boilVolume,
+      this.method,
+      this.ingredients,
+      this.foodPairing,
+      this.brewersTips});
 
   factory BeerModel.fromJson(Map<String, dynamic> json) {
     return BeerModel(
@@ -78,5 +85,54 @@ class BeerModel extends Beer {
             ? List<String>.from(json['food_pairing'])
             : null,
         brewersTips: json['brewers_tips']);
+  }
+  factory BeerModel.fromEntity(BeerEntity entity) {
+    return BeerModel(
+        id: entity.id,
+        name: entity.name,
+        tagline: entity.tagline,
+        firstBrewed: entity.firstBrewed,
+        description: entity.description,
+        imageUrl: entity.imageUrl,
+        abv: entity.abv,
+        ibu: entity.ibu,
+        targetFg: entity.targetFg,
+        targetOg: entity.targetOg,
+        ebc: entity.ebc,
+        srm: entity.srm,
+        ph: entity.ph,
+        attenuationLevel: entity.attenuationLevel,
+        volume: VolumeModel.fromEntity(entity.volume),
+        boilVolume: BoilVolumeModel.fromEntity(entity.boilVolume),
+        method: MethodModel.fromEntity(entity.method),
+        ingredients: IngredientsModel.fromEntity(entity.ingredients),
+        foodPairing: entity.foodPairing,
+        brewersTips: entity.brewersTips);
+  }
+
+  @override
+  BeerEntity convertToEntity() {
+    return BeerEntity(
+        id: id ?? Constants.unknownInt,
+        name: name ?? Constants.unknownString,
+        tagline: tagline ?? Constants.unknownString,
+        firstBrewed: firstBrewed ?? Constants.unknownString,
+        description: description ?? Constants.unknownString,
+        imageUrl: imageUrl ?? Constants.unknownString,
+        abv: abv ?? Constants.unknownDouble,
+        ibu: ibu ?? Constants.unknownDouble,
+        targetFg: targetFg ?? Constants.unknownDouble,
+        targetOg: targetOg ?? Constants.unknownDouble,
+        ebc: ebc ?? Constants.unknownDouble,
+        srm: srm ?? Constants.unknownDouble,
+        ph: ph ?? Constants.unknownDouble,
+        attenuationLevel: attenuationLevel ?? Constants.unknownDouble,
+        volume: volume?.convertToEntity() ?? VolumeEntity.empty(),
+        boilVolume: boilVolume?.convertToEntity() ?? BoilVolumeEntity.empty(),
+        method: method?.convertToEntity() ?? MethodEntity.empty(),
+        ingredients:
+            ingredients?.convertToEntity() ?? IngredientsEntity.empty(),
+        foodPairing: foodPairing ?? [],
+        brewersTips: brewersTips ?? Constants.unknownString);
   }
 }
