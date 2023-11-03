@@ -5,7 +5,7 @@ import 'package:flutter_beer_app/features/domain/entities/beer/method/temp.dart'
 
 class MashTempModel implements IModel<MashTempEntity> {
   final TempModel? temp;
-  final int? duration;
+  final num? duration;
   const MashTempModel({this.temp, this.duration});
 
   factory MashTempModel.fromJson(Map<String, dynamic> json) {
@@ -21,7 +21,7 @@ class MashTempModel implements IModel<MashTempEntity> {
       duration: entity.duration,
     );
   }
-  
+
   @override
   MashTempEntity convertToEntity() {
     return MashTempEntity(

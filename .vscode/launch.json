@@ -8,22 +8,17 @@
             "program": "lib/main_dev.dart",
             "args": [
                 "--dart-define",
-                "BEER_API_DEV=https://api.punkapi.com/v2/beers",
-                "--dart-define",
                 "APP_MODE=DEV"
               ]
         },
         {
-            "name": "flutter_beer_app PROFILE",
+            "name": "flutter_beer_app STAGE",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile",
             "program": "lib/main_profile.dart",
             "args": [
                 "--dart-define",
-                "BEER_API_PROFILE=https://api.punkapi.com/v2/beers",
-                "--dart-define",
-                "APP_MODE=PROFILE"
+                "APP_MODE=STAGE"
               ]
         },
         {
@@ -33,8 +28,6 @@
             "flutterMode": "release",
             "program": "lib/main_prod.dart",
             "args": [
-                "--dart-define",
-                "BEER_API_PROD=https://api.punkapi.com/v2/beers",
                 "--dart-define",
                 "APP_MODE=PROD"
               ]

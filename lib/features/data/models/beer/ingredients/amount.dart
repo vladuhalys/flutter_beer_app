@@ -2,8 +2,8 @@ import 'package:flutter_beer_app/core/base/interface_model.dart';
 import 'package:flutter_beer_app/core/constants/constants.dart';
 import 'package:flutter_beer_app/features/domain/entities/beer/ingredients/amount.dart';
 
-class AmountModel implements IModel<AmountEntity>{
-  final double? value;
+class AmountModel implements IModel<AmountEntity> {
+  final num? value;
   final String? unit;
   const AmountModel({this.value, this.unit});
 
@@ -20,11 +20,11 @@ class AmountModel implements IModel<AmountEntity>{
       unit: entity.unit,
     );
   }
-  
+
   @override
   AmountEntity convertToEntity() {
     return AmountEntity(
-      value: value ?? Constants.unknownDouble,
+      value: value ?? Constants.unknownNumber,
       unit: unit ?? Constants.unknownString,
     );
   }

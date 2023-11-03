@@ -9,20 +9,20 @@ import 'package:flutter_beer_app/features/domain/entities/beer/volume.dart';
 import 'beer_models_exports.dart';
 
 class BeerModel implements IModel<BeerEntity> {
-  final int? id;
+  final num? id;
   final String? name;
   final String? tagline;
   final String? firstBrewed;
   final String? description;
   final String? imageUrl;
-  final double? abv;
-  final double? ibu;
-  final double? targetFg;
-  final double? targetOg;
-  final double? ebc;
-  final double? srm;
-  final double? ph;
-  final double? attenuationLevel;
+  final num? abv;
+  final num? ibu;
+  final num? targetFg;
+  final num? targetOg;
+  final num? ebc;
+  final num? srm;
+  final num? ph;
+  final num? attenuationLevel;
   final VolumeModel? volume;
   final BoilVolumeModel? boilVolume;
 
@@ -113,20 +113,20 @@ class BeerModel implements IModel<BeerEntity> {
   @override
   BeerEntity convertToEntity() {
     return BeerEntity(
-        id: id ?? Constants.unknownInt,
+        id: id ?? Constants.unknownNumber,
         name: name ?? Constants.unknownString,
         tagline: tagline ?? Constants.unknownString,
         firstBrewed: firstBrewed ?? Constants.unknownString,
         description: description ?? Constants.unknownString,
         imageUrl: imageUrl ?? Constants.unknownString,
-        abv: abv ?? Constants.unknownDouble,
-        ibu: ibu ?? Constants.unknownDouble,
-        targetFg: targetFg ?? Constants.unknownDouble,
-        targetOg: targetOg ?? Constants.unknownDouble,
-        ebc: ebc ?? Constants.unknownDouble,
-        srm: srm ?? Constants.unknownDouble,
-        ph: ph ?? Constants.unknownDouble,
-        attenuationLevel: attenuationLevel ?? Constants.unknownDouble,
+        abv: abv ?? Constants.unknownNumber,
+        ibu: ibu ?? Constants.unknownNumber,
+        targetFg: targetFg ?? Constants.unknownNumber,
+        targetOg: targetOg ?? Constants.unknownNumber,
+        ebc: ebc ?? Constants.unknownNumber,
+        srm: srm ?? Constants.unknownNumber,
+        ph: ph ?? Constants.unknownNumber,
+        attenuationLevel: attenuationLevel ?? Constants.unknownNumber,
         volume: volume?.convertToEntity() ?? VolumeEntity.empty(),
         boilVolume: boilVolume?.convertToEntity() ?? BoilVolumeEntity.empty(),
         method: method?.convertToEntity() ?? MethodEntity.empty(),

@@ -4,13 +4,15 @@ import 'package:flutter_beer_app/features/domain/entities/beer/beer.dart';
 import 'package:flutter_beer_app/features/domain/repository/beer_repository.dart';
 
 class GetBeersPerPageUseCase
-    implements UseCase<DataState<List<BeerEntity>>, void> {
+    implements UseCase<DataState<List<BeerEntity>>, int> {
   final BeerRepository _beerRepository;
-  final int _page;
 
-  GetBeersPerPageUseCase(this._beerRepository, this._page);
+  const GetBeersPerPageUseCase({
+    required BeerRepository beerRepository,
+  }) : _beerRepository = beerRepository;
+
   @override
-  Future<DataState<List<BeerEntity>>> call({void params}) {
-    return _beerRepository.getBeersPerPage(_page);
+  Future<DataState<List<BeerEntity>>> call({required int params}) {
+    return _beerRepository.getBeersPerPage(params);
   }
 }

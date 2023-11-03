@@ -5,12 +5,13 @@ import 'temp.dart';
 
 class MashTempEntity extends Equatable {
   final TempEntity temp;
-  final int duration;
+  final num duration;
 
   const MashTempEntity({required this.temp, required this.duration});
 
   factory MashTempEntity.empty() {
-    return MashTempEntity(temp: TempEntity.empty(), duration: Constants.unknownInt);
+    return MashTempEntity(
+        temp: TempEntity.empty(), duration: Constants.unknownNumber);
   }
 
   @override

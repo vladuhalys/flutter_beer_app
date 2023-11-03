@@ -7,20 +7,20 @@ import 'ingredients/ingredient.dart';
 import 'method/method.dart';
 
 class BeerEntity extends Equatable {
-  final int id;
+  final num id;
   final String name;
   final String tagline;
   final String firstBrewed;
   final String description;
   final String imageUrl;
-  final double abv;
-  final double ibu;
-  final double targetFg;
-  final double targetOg;
-  final double ebc;
-  final double srm;
-  final double ph;
-  final double attenuationLevel;
+  final num abv;
+  final num ibu;
+  final num targetFg;
+  final num targetOg;
+  final num ebc;
+  final num srm;
+  final num ph;
+  final num attenuationLevel;
   final VolumeEntity volume;
   final BoilVolumeEntity boilVolume;
   final MethodEntity method;
@@ -52,19 +52,19 @@ class BeerEntity extends Equatable {
 
   factory BeerEntity.empty() {
     return BeerEntity(
-        id: Constants.unknownInt,
+        id: Constants.unknownNumber,
         name: Constants.unknownString,
         tagline: Constants.unknownString,
         firstBrewed: Constants.unknownString,
         description: Constants.unknownString,
         imageUrl: Constants.unknownString,
-        abv: Constants.unknownDouble,
-        ibu: Constants.unknownDouble,
-        targetFg: Constants.unknownDouble,
-        targetOg: Constants.unknownDouble,
-        ebc: Constants.unknownDouble,
-        srm: Constants.unknownDouble,
-        ph: Constants.unknownDouble,
+        abv: Constants.unknownNumber,
+        ibu: Constants.unknownNumber,
+        targetFg: Constants.unknownNumber,
+        targetOg: Constants.unknownNumber,
+        ebc: Constants.unknownNumber,
+        srm: Constants.unknownNumber,
+        ph: Constants.unknownNumber,
         attenuationLevel: 0,
         volume: VolumeEntity.empty(),
         boilVolume: BoilVolumeEntity.empty(),

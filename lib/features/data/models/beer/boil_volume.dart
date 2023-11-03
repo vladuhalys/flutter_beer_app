@@ -3,7 +3,7 @@ import 'package:flutter_beer_app/core/constants/constants.dart';
 import 'package:flutter_beer_app/features/domain/entities/beer/boil_volume.dart';
 
 class BoilVolumeModel implements IModel<BoilVolumeEntity> {
-  final int? value;
+  final num? value;
   final String? unit;
   const BoilVolumeModel({this.value, this.unit});
 
@@ -24,7 +24,7 @@ class BoilVolumeModel implements IModel<BoilVolumeEntity> {
   @override
   BoilVolumeEntity convertToEntity() {
     return BoilVolumeEntity(
-      value: value ?? Constants.unknownInt,
+      value: value ?? Constants.unknownNumber,
       unit: unit ?? Constants.unknownString,
     );
   }
