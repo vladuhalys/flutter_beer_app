@@ -1,15 +1,11 @@
 import 'package:dio/dio.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter_beer_app/features/domain/entities/beer/beer.dart';
 
-abstract class RemoteBeersState extends Equatable {
+abstract class RemoteBeersState {
   final List<BeerEntity>? beers;
   final DioException? error;
 
   const RemoteBeersState({this.beers, this.error});
-
-  @override
-  List<Object> get props => [beers!, error!];
 }
 
 class RemoteBeersLoading extends RemoteBeersState {

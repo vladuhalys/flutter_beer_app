@@ -68,7 +68,7 @@ class BeerModel implements IModel<BeerEntity> {
         ebc: json['ebc']?.toDouble(),
         srm: json['srm']?.toDouble(),
         ph: json['ph']?.toDouble(),
-        attenuationLevel: json['attenuation_level'].toDouble(),
+        attenuationLevel: json['attenuation_level']?.toDouble(),
         volume: json['volume'] != null
             ? VolumeModel.fromJson(json['volume'])
             : null,

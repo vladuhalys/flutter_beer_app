@@ -4,5 +4,6 @@ abstract class RemoteBeersEvent {
 
 class GetBeers extends RemoteBeersEvent {
   final int page;
-  const GetBeers(this.page);
+
+  GetBeers(this.page);
 }

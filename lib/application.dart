@@ -8,6 +8,7 @@ class Application extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Beer App',
       themeMode: ThemeMode.dark,
       darkTheme: ThemeData(
