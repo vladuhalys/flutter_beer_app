@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_beer_app/features/presentation/screens/about/about.dart';
 import 'package:flutter_beer_app/features/presentation/screens/home/home.dart';
 
 class Application extends StatelessWidget {
@@ -20,7 +19,6 @@ class Application extends StatelessWidget {
       initialRoute: '/home',
       routes: {
         '/home': (context) => const HomeScreen(),
-        '/about': (context) => const AboutScreen(),
       },
     );
   }

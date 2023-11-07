@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_beer_app/features/domain/entities/beer/beer.dart';
+import 'package:flutter_beer_app/features/presentation/screens/about/about.dart';
 
 class BeerWidget extends StatelessWidget {
   final BeerEntity beer;
@@ -12,7 +13,11 @@ class BeerWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       child: InkWell(
         onTap: () {
-          //Navigator.pushNamed(context, '/beer_detail', arguments: beer);
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => AboutScreen(beer: beer),
+            ),
+          );
         },
         child: Card(
           elevation: 0,
