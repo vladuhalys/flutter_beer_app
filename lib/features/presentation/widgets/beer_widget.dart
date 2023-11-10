@@ -12,6 +12,7 @@ class BeerWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       child: InkWell(
+        borderRadius: BorderRadius.circular(25),
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute(
@@ -33,6 +34,9 @@ class BeerWidget extends StatelessWidget {
                   beer.imageUrl.toString(),
                   height: 150,
                   width: 100,
+                  errorBuilder: (context, error, stackTrace) {
+                    return const Icon(Icons.error);
+                  },
                 ),
                 Expanded(
                   child: Padding(

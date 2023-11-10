@@ -1,3 +1,4 @@
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_beer_app/features/domain/entities/beer/beer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,32 +9,61 @@ import 'package:flutter_beer_app/features/presentation/bloc/beer/remote/remote_b
 
 class RemoteBeersBloc extends Bloc<RemoteBeersEvent, RemoteBeersState> {
   final GetBeersPerPageUseCase _getBeersPerPageUseCase;
-  List<BeerEntity>? beers;
   late ScrollController sc;
-  int page = 1;
 
   RemoteBeersBloc(this._getBeersPerPageUseCase)
       : super(const RemoteBeersLoading()) {
     sc = ScrollController();
     sc.addListener(() {
-      if (sc.position.pixels == sc.position.maxScrollExtent) {
-        page++;
-        add(GetBeers(page));
+      final double paginationExtent = sc.position.maxScrollExtent - 50;
+      final maxExtent = paginationExtent < 0 ? 0 : paginationExtent;
+      if (sc.position.pixels > maxExtent) {
+        add(PaginateBeers());
       }
     });
-    beers = <BeerEntity>[];
-    on<GetBeers>(onGetBeers);
+    on<GetBeersInit>(onGetBeers);
+    on<PaginateBeers>(
+      onPaginateBeers,
+      transformer: sequential(),
+    );
   }
 
-  void onGetBeers(GetBeers event, Emitter<RemoteBeersState> emit) async {
+  @override
+  Future<void> close() {
+    sc.dispose();
+    return super.close();
+  }
+
+  void onGetBeers(
+      RemoteBeersEvent event, Emitter<RemoteBeersState> emit) async {
+    emit(const RemoteBeersLoading());
     final DataState<List<BeerEntity>> dataState =
-        await _getBeersPerPageUseCase.call(params: event.page);
+        await _getBeersPerPageUseCase.call(params: 1);
     if (dataState is DataSuccess && dataState.data != null) {
-      beers?.addAll(dataState.data!);
-      emit(RemoteBeersDone(dataState.data!));
+      emit(RemoteBeersDone(beers: dataState.data!, page: 1));
     }
     if (dataState is DataFailed) {
       emit(RemoteBeersError(dataState.error!));
+    }
+  }
+
+  void onPaginateBeers(
+      PaginateBeers event, Emitter<RemoteBeersState> emit) async {
+    if (state is RemoteBeersDone) {
+      print('PAGINATION');
+      final loaded = state as RemoteBeersDone;
+      emit(RemoteBeersPaginating(beers: loaded.beers, page: loaded.page));
+      final DataState<List<BeerEntity>> dataState =
+          await _getBeersPerPageUseCase.call(params: loaded.page + 1);
+      await Future.delayed(const Duration(seconds: 1));
+      if (dataState is DataSuccess && dataState.data != null) {
+        final List<BeerEntity> beers = loaded.beers!;
+        beers.addAll(dataState.data!);
+        emit(RemoteBeersDone(beers: beers, page: loaded.page + 1));
+      }
+      if (dataState is DataFailed) {
+        emit(RemoteBeersError(dataState.error!));
+      }
     }
   }
 }

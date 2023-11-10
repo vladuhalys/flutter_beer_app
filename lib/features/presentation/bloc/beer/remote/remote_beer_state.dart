@@ -2,10 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_beer_app/features/domain/entities/beer/beer.dart';
 
 abstract class RemoteBeersState {
-  final List<BeerEntity>? beers;
-  final DioException? error;
-
-  const RemoteBeersState({this.beers, this.error});
+  const RemoteBeersState();
 }
 
 class RemoteBeersLoading extends RemoteBeersState {
@@ -13,9 +10,24 @@ class RemoteBeersLoading extends RemoteBeersState {
 }
 
 class RemoteBeersDone extends RemoteBeersState {
-  const RemoteBeersDone(List<BeerEntity> beers) : super(beers: beers);
+  final int page;
+  final List<BeerEntity>? beers;
+  const RemoteBeersDone({
+    required this.beers,
+    required this.page,
+  });
+}
+
+class RemoteBeersPaginating extends RemoteBeersState {
+  final int page;
+  final List<BeerEntity>? beers;
+  const RemoteBeersPaginating({
+    required this.beers,
+    required this.page,
+  });
 }
 
 class RemoteBeersError extends RemoteBeersState {
-  const RemoteBeersError(DioException error) : super(error: error);
+  final DioException? error;
+  const RemoteBeersError(this.error);
 }
