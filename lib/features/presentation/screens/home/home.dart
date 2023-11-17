@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_beer_app/features/data/repository/beer_repository_implements.dart';
-import 'package:flutter_beer_app/features/domain/usecases/usecases.dart';
-import 'package:flutter_beer_app/features/presentation/bloc/beer/remote/remote_beer_block.dart';
+import 'package:flutter_beer_app/features/domain/usecases/get_beers_per_page_usecase.dart';
+import 'package:flutter_beer_app/features/presentation/bloc/beer/remote/remote_beer_bloc.dart';
 import 'package:flutter_beer_app/features/presentation/bloc/beer/remote/remote_beer_event.dart';
 import 'package:flutter_beer_app/features/presentation/bloc/beer/remote/remote_beer_state.dart';
 import 'package:flutter_beer_app/features/presentation/widgets/beer_widget.dart';
