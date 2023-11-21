@@ -20,11 +20,12 @@ class PrimaryTextForm extends StatefulWidget {
 }
 
 class _PrimaryTextFormState extends State<PrimaryTextForm> {
+  bool isVisiable = false;
   bool isObscure = true;
   bool isObscureCheck() {
-    isObscure = widget.textFormType == TextFormType.password ||
+    isVisiable = widget.textFormType == TextFormType.password ||
         widget.textFormType == TextFormType.confirmPassword;
-    return isObscure;
+    return isVisiable;
   }
 
   @override
@@ -39,8 +40,7 @@ class _PrimaryTextFormState extends State<PrimaryTextForm> {
           context.read<AuthCubit>().onChangedConfirmPassword(value);
         }
       },
-      obscureText: widget.textFormType == TextFormType.password ||
-          widget.textFormType == TextFormType.confirmPassword,
+      obscureText: (isObscureCheck()) ? isObscure : false,
       decoration: InputDecoration(
         errorText: widget.validateErrorText,
         hintText: widget.hintText,
@@ -52,7 +52,7 @@ class _PrimaryTextFormState extends State<PrimaryTextForm> {
                   });
                 },
                 icon: Icon(
-                  isObscureCheck() ? Icons.visibility : Icons.visibility_off,
+                  (isObscure) ? Icons.visibility_off : Icons.visibility,
                   color: Colors.black,
                 ),
               )

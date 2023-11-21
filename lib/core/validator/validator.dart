@@ -10,7 +10,7 @@ abstract class Validator<T> {
   ///
   /// The [value] is validated based on the specific implementation of the validator.
   /// The validation state is returned as a [ValidateState] object.
-  ValidateState<String> validate(T value);
+  ValidateState<T> validate(T value);
 
   /// Sets the next validator in the validation pipeline.
   ///
@@ -38,9 +38,9 @@ class ValidatorChain<T> implements Validator<T> {
   Validator<T>? _nextValidator;
 
   @override
-  ValidateState<String> validate(T value) {
+  ValidateState<T> validate(T value) {
     if (_nextValidator == null) {
-      return const ValidateSuccess<String>('');
+      return ValidateSuccess<T>(value);
     }
     return _nextValidator!.validate(value);
   }

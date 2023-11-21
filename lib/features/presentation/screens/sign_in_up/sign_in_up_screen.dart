@@ -13,17 +13,18 @@ class SignInUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         body: BlocProvider(
-      create: (context) => AuthCubit(),
-      child: BlocBuilder<AuthCubit, AuthState>(
-        builder: (context, state) {
-          if (state is LoginAuthState) {
-            return _LoadedForm(state: state);
-          }
-          return const Offstage();
-        },
-      ),
-    ));
+          create: (context) => AuthCubit(),
+          child: BlocBuilder<AuthCubit, AuthState>(
+            builder: (context, state) {
+              if (state is LoginAuthState) {
+                return _LoadedForm(state: state);
+              }
+              return const Offstage();
+            },
+          ),
+        ));
   }
 }
 
@@ -52,19 +53,61 @@ class _LoadedForm extends StatelessWidget {
               textFormType: TextFormType.password,
               validateErrorText: state.errorsValidate.errorPassword),
           const SizedBox(height: 25),
+          if (state.screenType == ScreenType.signUp)
+            Column(
+              children: [
+                PrimaryTextForm(
+                    hintText: 'Confirm Password',
+                    textFormType: TextFormType.confirmPassword,
+                    validateErrorText:
+                        state.errorsValidate.errorConfirmPassword),
+                const SizedBox(height: 25),
+              ],
+            ),
           PrimaryButton(
-              child: const Text('Sign In', style: TextStyle(fontSize: 16)),
+              child: Text(
+                  (state.screenType == ScreenType.signIn)
+                      ? 'Sign In'
+                      : 'Sign Up',
+                  style: const TextStyle(fontSize: 16)),
               onPressed: () {
                 context.read<AuthCubit>().validate();
               }),
           const SizedBox(height: 25),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                  (state.screenType == ScreenType.signIn)
+                      ? 'Don\'t have an account?'
+                      : 'Already have an account?',
+                  style: const TextStyle(fontSize: 16)),
+              TextButton(
+                  onPressed: () {
+                    context.read<AuthCubit>().changeScreenType();
+                  },
+                  child: Text(
+                      (state.screenType == ScreenType.signIn)
+                          ? 'Sign Up'
+                          : 'Sign In',
+                      style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF000000)))),
+            ],
+          ),
+          const SizedBox(height: 25),
           PrimaryButton(
-              child: const Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Sign in with', style: TextStyle(fontSize: 16)),
-                  SizedBox(width: 10),
-                  Icon(IonIcons.logo_google, size: 24),
+                  Text(
+                      (state.screenType == ScreenType.signIn)
+                          ? 'Sign in with'
+                          : 'Sign up with',
+                      style: const TextStyle(fontSize: 16)),
+                  const SizedBox(width: 10),
+                  const Icon(IonIcons.logo_google, size: 24),
                 ],
               ),
               onPressed: () {}),
