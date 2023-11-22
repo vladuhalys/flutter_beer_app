@@ -1,5 +1,6 @@
+import 'package:flutter_beer_app/core/dto/validation_dto/validate_dto_exports.dart';
 import 'package:flutter_beer_app/core/extension/string_extensio.dart';
-import 'package:flutter_beer_app/core/validator/validate_state.dart';
+
 import 'package:flutter_beer_app/core/validator/validator.dart';
 
 /// A validator for password fields.

@@ -1,8 +1,9 @@
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_beer_app/core/dto/api_dto/api_dto_exports.dart';
 import 'package:flutter_beer_app/features/domain/entities/beer/beer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_beer_app/core/error/dio_error.dart';
+
 import 'package:flutter_beer_app/features/domain/usecases/get_beers_per_page_usecase.dart';
 import 'package:flutter_beer_app/features/presentation/bloc/beer/remote/remote_beer_event.dart';
 import 'package:flutter_beer_app/features/presentation/bloc/beer/remote/remote_beer_state.dart';

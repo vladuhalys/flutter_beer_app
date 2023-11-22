@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_beer_app/core/error/dio_error.dart';
-import 'package:flutter_beer_app/features/data/data_source/remote/beer_api_service.dart';
+import 'package:flutter_beer_app/core/dto/api_dto/api_dto_exports.dart';
+
+import 'package:flutter_beer_app/features/data/data_source/remote/api/beer_api_service.dart';
 import 'package:flutter_beer_app/features/data/models/beer/beer.dart';
 import 'package:flutter_beer_app/features/domain/entities/beer/beer.dart';
 
@@ -21,6 +22,7 @@ class BeerRepositoryImplements extends BeerRepository {
       );
       List<BeerEntity> beers = [];
       response.data.forEach((beer) {
+        /// Convert json to BeerModel and then to BeerEntity
         beers.add(BeerModel.fromJson(beer).convertToEntity());
       });
       return DataSuccess(beers);

@@ -71,7 +71,7 @@ class _LoadedForm extends StatelessWidget {
                       : 'Sign Up',
                   style: const TextStyle(fontSize: 16)),
               onPressed: () {
-                context.read<AuthCubit>().validate();
+                context.read<AuthCubit>().login();
               }),
           const SizedBox(height: 25),
           Row(

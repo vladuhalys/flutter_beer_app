@@ -1,5 +1,8 @@
+import 'package:flutter_beer_app/config/dev_log/dev_log.dart';
+import 'package:flutter_beer_app/core/dto/supabase_dto/success/supabase_dto_success.dart';
 import 'package:flutter_beer_app/core/validator/errors_validate/errors_validate.dart';
 import 'package:flutter_beer_app/core/validator/password_validator/password_validator.dart';
+import 'package:flutter_beer_app/features/data/repository/user_repository_impliments.dart';
 import 'package:flutter_beer_app/features/presentation/bloc/validate_cubit/auth_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,7 +14,7 @@ class AuthCubit extends Cubit<AuthState> {
           errorsValidate: ErrorsValidate(),
         ));
 
-  void validate() {
+  bool validate() {
     var authState = (state as LoginAuthState);
 
     List<String?> errors = [];
@@ -33,16 +36,57 @@ class AuthCubit extends Cubit<AuthState> {
         .validate(authState.values[2], authState.values[1])
         .data);
 
-    errors.add(validatorConfirm
-        .validate(authState.values[2], authState.values[1])
-        .error);
-    emit(authState.copyWith(
-      errorsValidate: ErrorsValidate(
-        errorEmail: errors[0],
-        errorPassword: errors[1],
-        errorConfirmPassword: errors[2],
-      ),
-    ));
+    if (authState.screenType != ScreenType.signIn) {
+      errors.add(validatorConfirm
+          .validate(authState.values[2], authState.values[1])
+          .error);
+    }
+
+    bool isValidate = errors.every((element) => element == null);
+    if (isValidate) {
+      return true;
+    } else {
+      emit(authState.copyWith(
+        values: newAuthStateValues,
+        errorsValidate: ErrorsValidate(
+          errorEmail: errors[0],
+          errorPassword: errors[1],
+          errorConfirmPassword: errors[2],
+        ),
+      ));
+      return false;
+    }
+  }
+
+  void login() {
+    UserRepositoryImplements userRepositoryImplements =
+        UserRepositoryImplements();
+    bool isValidate = validate();
+    if (isValidate) {
+      final authState = (state as LoginAuthState);
+      final email = authState.values[0]!;
+      final password = authState.values[1]!;
+      if (authState.screenType == ScreenType.signIn) {
+        var result = userRepositoryImplements.signInWithEmail(email, password);
+
+        result.then((value) {
+          if (value is SupabaseDataSuccess) {
+            DevLog.logSuccess('User ID: ${value.data?.email}');
+          } else {
+            DevLog.logError('User not found');
+          }
+        });
+      } else {
+        var result = userRepositoryImplements.signUpWithEmail(email, password);
+        result.then((value) {
+          if (value is SupabaseDataSuccess) {
+            DevLog.logSuccess('User ID: ${value.data?.email}');
+          } else {
+            DevLog.logError('User not found');
+          }
+        });
+      }
+    }
   }
 
   void changeScreenType() {

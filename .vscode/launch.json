@@ -8,7 +8,11 @@
             "program": "lib/main_dev.dart",
             "args": [
                 "--dart-define",
-                "APP_MODE=DEV"
+                "APP_MODE=DEV",
+                "--dart-define",
+                "SUPABASE_URL=https://fvtnpeozvnbxdtkdznkd.supabase.co",
+                "--dart-define",
+                "SUPABASE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ2dG5wZW96dm5ieGR0a2R6bmtkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDAxMzM1NjYsImV4cCI6MjAxNTcwOTU2Nn0.1UT16ld5iT8cNw3ed6XqDmxTlIgDTOgd3BV_DDNAd2g"
               ]
         },
         {
@@ -18,7 +22,11 @@
             "program": "lib/main_profile.dart",
             "args": [
                 "--dart-define",
-                "APP_MODE=STAGE"
+                "APP_MODE=STAGE",
+                "--dart-define",
+                "SUPABASE_URL=https://fvtnpeozvnbxdtkdznkd.supabase.co",
+                "--dart-define",
+                "SUPABASE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ2dG5wZW96dm5ieGR0a2R6bmtkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDAxMzM1NjYsImV4cCI6MjAxNTcwOTU2Nn0.1UT16ld5iT8cNw3ed6XqDmxTlIgDTOgd3BV_DDNAd2g"
               ]
         },
         {
@@ -29,7 +37,11 @@
             "program": "lib/main_prod.dart",
             "args": [
                 "--dart-define",
-                "APP_MODE=PROD"
+                "APP_MODE=PROD",
+                "--dart-define",
+                "SUPABASE_URL=https://fvtnpeozvnbxdtkdznkd.supabase.co",
+                "--dart-define",
+                "SUPABASE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ2dG5wZW96dm5ieGR0a2R6bmtkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDAxMzM1NjYsImV4cCI6MjAxNTcwOTU2Nn0.1UT16ld5iT8cNw3ed6XqDmxTlIgDTOgd3BV_DDNAd2g"
               ]
         }
     ]

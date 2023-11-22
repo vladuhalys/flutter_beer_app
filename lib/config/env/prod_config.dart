@@ -11,4 +11,10 @@ final class ProdEnvironmentConfig implements EnvironmentConfig {
 
   @override
   bool get isDev => false;
+
+  @override
+  String get supabaseKey => const String.fromEnvironment('SUPABASE_URL');
+
+  @override
+  String get supabaseUrl => const String.fromEnvironment('SUPABASE_KEY');
 }

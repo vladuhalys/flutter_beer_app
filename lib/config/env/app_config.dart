@@ -10,6 +10,7 @@ final class ApplicationConfig {
 
   static EnvironmentConfig get environmentConfig {
     const envString = String.fromEnvironment('APP_MODE');
+
     switch (envString) {
       case _dev:
         return DevEnvironmentConfig();
