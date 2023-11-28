@@ -110,7 +110,11 @@ class _LoadedForm extends StatelessWidget {
                   const Icon(IonIcons.logo_google, size: 24),
                 ],
               ),
-              onPressed: () {}),
+              onPressed: () {
+                (state.screenType == ScreenType.signIn)
+                    ? context.read<AuthCubit>().signInWithGoogle()
+                    : context.read<AuthCubit>().signInWithGoogle();
+              }),
         ],
       ),
     );

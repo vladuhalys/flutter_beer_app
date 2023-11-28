@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "751663190551",
+    "project_id": "beerapp-e738b",
+    "storage_bucket": "beerapp-e738b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:751663190551:android:9fa968245961aa60e04252",
+        "android_client_info": {
+          "package_name": "com.example.flutter_beer_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "751663190551-o1unoctcfq6oe3sl9nh7p1lc29dr3shg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flutter_beer_app",
+            "certificate_hash": "50f3cb8e3111c503086a94f58834d96f67d8fcd5"
+          }
+        },
+        {
+          "client_id": "751663190551-3ini46k02mms53rnerlda4m9orlckq8g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAW9Mq1fMjds9DpJzQTK1V21JyXDvD9qZA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "751663190551-3ini46k02mms53rnerlda4m9orlckq8g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

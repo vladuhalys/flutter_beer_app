@@ -40,15 +40,27 @@ android {
         main.java.srcDirs += 'src/main/kotlin'
     }
 
+    signingConfigs {
+        config {
+            storeFile file("android\\app_name.jks")
+            storePassword "02121999"
+            keyAlias "ALIAS_STRING"
+            keyPassword "02121999"
+        }
+    }
+
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.example.flutter_beer_app"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion flutter.minSdkVersion
+        minSdkVersion 21
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        manifestPlaceholders += [
+                'appAuthRedirectScheme': applicationId
+        ]
     }
 
     buildTypes {
@@ -64,4 +76,8 @@ flutter {
     source '../..'
 }
 
-dependencies {}
+dependencies {
+    implementation 'com.google.android.gms:play-services-auth:20.4.1'
+}
+
+apply plugin: 'com.google.gms.google-services'

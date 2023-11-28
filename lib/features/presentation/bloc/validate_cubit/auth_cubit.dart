@@ -1,5 +1,5 @@
 import 'package:flutter_beer_app/config/dev_log/dev_log.dart';
-import 'package:flutter_beer_app/core/dto/supabase_dto/success/supabase_dto_success.dart';
+import 'package:flutter_beer_app/core/dto/firebase_dto/success/firebase_dto_success.dart';
 import 'package:flutter_beer_app/core/validator/errors_validate/errors_validate.dart';
 import 'package:flutter_beer_app/core/validator/password_validator/password_validator.dart';
 import 'package:flutter_beer_app/features/data/repository/user_repository_impliments.dart';
@@ -58,6 +58,32 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
+  void signInWithGoogle() {
+    UserRepositoryImplements userRepositoryImplements =
+        UserRepositoryImplements();
+    var result = userRepositoryImplements.signUpWithGoogle();
+    result.then((value) {
+      if (value is FirebaseDataSuccess) {
+        DevLog.logSuccess('User ID: ${value.data?.email}');
+      } else {
+        DevLog.logError('User not found');
+      }
+    });
+  }
+
+  void signUpWithGoogle() {
+    UserRepositoryImplements userRepositoryImplements =
+        UserRepositoryImplements();
+    var result = userRepositoryImplements.signUpWithGoogle();
+    result.then((value) {
+      if (value is FirebaseDataSuccess) {
+        DevLog.logSuccess('User ID: ${value.data?.email}');
+      } else {
+        DevLog.logError('User not found');
+      }
+    });
+  }
+
   void login() {
     UserRepositoryImplements userRepositoryImplements =
         UserRepositoryImplements();
@@ -70,7 +96,7 @@ class AuthCubit extends Cubit<AuthState> {
         var result = userRepositoryImplements.signInWithEmail(email, password);
 
         result.then((value) {
-          if (value is SupabaseDataSuccess) {
+          if (value is FirebaseDataSuccess) {
             DevLog.logSuccess('User ID: ${value.data?.email}');
           } else {
             DevLog.logError('User not found');
@@ -79,7 +105,7 @@ class AuthCubit extends Cubit<AuthState> {
       } else {
         var result = userRepositoryImplements.signUpWithEmail(email, password);
         result.then((value) {
-          if (value is SupabaseDataSuccess) {
+          if (value is FirebaseDataSuccess) {
             DevLog.logSuccess('User ID: ${value.data?.email}');
           } else {
             DevLog.logError('User not found');
