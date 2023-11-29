@@ -14,7 +14,7 @@ class AuthCubit extends Cubit<AuthState> {
           errorsValidate: ErrorsValidate(),
         ));
 
-  bool validate() {
+  Future<bool> validate() {
     var authState = (state as LoginAuthState);
 
     List<String?> errors = [];
@@ -44,7 +44,7 @@ class AuthCubit extends Cubit<AuthState> {
 
     bool isValidate = errors.every((element) => element == null);
     if (isValidate) {
-      return true;
+      return Future.value(true);
     } else {
       emit(authState.copyWith(
         values: newAuthStateValues,
@@ -54,64 +54,53 @@ class AuthCubit extends Cubit<AuthState> {
           errorConfirmPassword: errors[2],
         ),
       ));
+      return Future.value(false);
+    }
+  }
+
+  Future<bool> signInWithGoogle() async {
+    UserRepositoryImplements userRepositoryImplements =
+        UserRepositoryImplements();
+    var result = await userRepositoryImplements.signUpWithGoogle();
+    if (result is FirebaseDataSuccess) {
+      DevLog.logSuccess('User ID: ${result.data?.email}');
+      return true;
+    } else {
+      DevLog.logError('User not found');
       return false;
     }
   }
 
-  void signInWithGoogle() {
+  Future<bool> login() async {
     UserRepositoryImplements userRepositoryImplements =
         UserRepositoryImplements();
-    var result = userRepositoryImplements.signUpWithGoogle();
-    result.then((value) {
-      if (value is FirebaseDataSuccess) {
-        DevLog.logSuccess('User ID: ${value.data?.email}');
-      } else {
-        DevLog.logError('User not found');
-      }
-    });
-  }
-
-  void signUpWithGoogle() {
-    UserRepositoryImplements userRepositoryImplements =
-        UserRepositoryImplements();
-    var result = userRepositoryImplements.signUpWithGoogle();
-    result.then((value) {
-      if (value is FirebaseDataSuccess) {
-        DevLog.logSuccess('User ID: ${value.data?.email}');
-      } else {
-        DevLog.logError('User not found');
-      }
-    });
-  }
-
-  void login() {
-    UserRepositoryImplements userRepositoryImplements =
-        UserRepositoryImplements();
-    bool isValidate = validate();
-    if (isValidate) {
+    if (await validate()) {
       final authState = (state as LoginAuthState);
       final email = authState.values[0]!;
       final password = authState.values[1]!;
       if (authState.screenType == ScreenType.signIn) {
-        var result = userRepositoryImplements.signInWithEmail(email, password);
-
-        result.then((value) {
-          if (value is FirebaseDataSuccess) {
-            DevLog.logSuccess('User ID: ${value.data?.email}');
-          } else {
-            DevLog.logError('User not found');
-          }
-        });
+        var result =
+            await userRepositoryImplements.signInWithEmail(email, password);
+        if (result is FirebaseDataSuccess) {
+          DevLog.logSuccess('User ID: ${result.data?.email}');
+          return true;
+        } else {
+          DevLog.logError('User not found');
+          return false;
+        }
       } else {
-        var result = userRepositoryImplements.signUpWithEmail(email, password);
-        result.then((value) {
-          if (value is FirebaseDataSuccess) {
-            DevLog.logSuccess('User ID: ${value.data?.email}');
-          } else {
-            DevLog.logError('User not found');
-          }
-        });
+        var result =
+            await userRepositoryImplements.signUpWithEmail(email, password);
+        if (result is FirebaseDataSuccess) {
+          DevLog.logSuccess('User ID: ${result.data?.email}');
+          return true;
+        } else {
+          DevLog.logError('User not found');
+          return false;
+        }
       }
+    } else {
+      return false;
     }
   }
 

@@ -14,6 +14,18 @@ class FirebaseProvider {
     }
   }
 
+  Future<FirebaseDataState> getCurrentUser() async {
+    try {
+      User? result = FirebaseAuth.instance.currentUser;
+      return Future.value(FirebaseDataSuccess<User?>(result));
+    } on FirebaseAuthException catch (e) {
+      return Future.value(FirebaseDataFailed(e));
+    } catch (e) {
+      print(e);
+      return Future.value(FirebaseDataFailed(e.toString()));
+    }
+  }
+
   Future<FirebaseDataState> signUpWithEmail(
       String email, String password) async {
     try {
@@ -23,6 +35,10 @@ class FirebaseProvider {
     } on FirebaseAuthException catch (e) {
       return Future.value(FirebaseDataFailed<String>(e.message!));
     }
+  }
+
+  Future<void> signOut() async {
+    await FirebaseAuth.instance.signOut();
   }
 
   Future<FirebaseDataState> signInWithGoogle() async {

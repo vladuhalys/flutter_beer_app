@@ -5,6 +5,7 @@ class UserEntity extends Equatable {
 
   final String email;
   final String photoUrl;
+  
 
   @override
   List<Object?> get props => [email, photoUrl];

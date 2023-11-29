@@ -8,5 +8,6 @@ abstract class UserRepository {
       String email, String password);
   Future<FirebaseDataState<UserEntity>> signInWithGoogle();
   Future<FirebaseDataState<UserEntity>> signUpWithGoogle();
+  Future<FirebaseDataState<UserEntity>> getCurrentUser();
   Future<void> signOut();
 }

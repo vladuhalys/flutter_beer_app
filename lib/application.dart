@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_beer_app/core/router/router.dart';
 import 'package:flutter_beer_app/features/presentation/screens/home/home.dart';
+import 'package:flutter_beer_app/features/presentation/screens/router/router_screen.dart';
 import 'package:flutter_beer_app/features/presentation/screens/sign_in_up/sign_in_up_screen.dart';
 
 class Application extends StatelessWidget {
@@ -16,6 +17,7 @@ class Application extends StatelessWidget {
           ThemeData(primarySwatch: Colors.grey, primaryColor: Colors.black),
       initialRoute: Routs.initRoute,
       routes: {
+        Routs.router: (context) => const RouterScreen(),
         Routs.home: (context) => const HomeScreen(),
         Routs.signIn: (context) => const SignInUpScreen(),
       },

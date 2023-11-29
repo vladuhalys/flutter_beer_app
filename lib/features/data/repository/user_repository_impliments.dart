@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_beer_app/config/dev_log/dev_log.dart';
 import 'package:flutter_beer_app/core/dto/firebase_dto/firebase_dto_exports.dart';
 import 'package:flutter_beer_app/features/data/data_source/remote/firebase/firebase_provider.dart';
 import 'package:flutter_beer_app/features/data/models/user/user_model.dart';
@@ -24,15 +26,19 @@ class UserRepositoryImplements extends UserRepository {
   }
 
   @override
-  Future<FirebaseDataState<UserEntity>> signInWithGoogle() {
-    // TODO: implement signInWithGoogle
-    throw UnimplementedError();
+  Future<FirebaseDataState<UserEntity>> signInWithGoogle() async {
+    var result = await firebaseProvider.signInWithGoogle();
+    if (result is FirebaseDataSuccess) {
+      return Future.value(FirebaseDataSuccess<UserEntity>(
+          UserModel(email: result.data!.email!).convertToEntity()));
+    } else {
+      return Future.value(FirebaseDataFailed<UserEntity>(result.toString()));
+    }
   }
 
   @override
   Future<void> signOut() {
-    // TODO: implement signOut
-    throw UnimplementedError();
+    return firebaseProvider.signOut();
   }
 
   @override
@@ -52,9 +58,24 @@ class UserRepositoryImplements extends UserRepository {
     var result = await firebaseProvider.signInWithGoogle();
     if (result is FirebaseDataSuccess) {
       return Future.value(FirebaseDataSuccess<UserEntity>(
-          UserModel(email: result.data!.email!).convertToEntity()));
+          UserModel(email: result.data!.email!, photoUrl: result.data!.photoUrl)
+              .convertToEntity()));
     } else {
       return Future.value(FirebaseDataFailed<UserEntity>(result.toString()));
+    }
+  }
+
+  @override
+  Future<FirebaseDataState<UserEntity>> getCurrentUser() async {
+    FirebaseDataState? result = await firebaseProvider.getCurrentUser();
+    DevLog.logInfo(result.toString());
+    if (result is FirebaseDataSuccess && result.data != null) {
+      User user = result.data as User;
+      return FirebaseDataSuccess<UserEntity>(
+          UserModel(photoUrl: user.photoURL, email: user.email)
+              .convertToEntity());
+    } else {
+      return FirebaseDataFailed(result);
     }
   }
 }

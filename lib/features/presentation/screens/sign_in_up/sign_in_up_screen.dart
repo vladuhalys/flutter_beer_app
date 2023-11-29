@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_beer_app/features/presentation/bloc/validate_cubit/auth_cubit.dart';
 import 'package:flutter_beer_app/features/presentation/bloc/validate_cubit/auth_state.dart';
+import 'package:flutter_beer_app/features/presentation/screens/router/router_screen.dart';
 import 'package:flutter_beer_app/features/presentation/widgets/primary_button.dart';
 import 'package:flutter_beer_app/features/presentation/widgets/primary_text_form.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -71,7 +72,12 @@ class _LoadedForm extends StatelessWidget {
                       : 'Sign Up',
                   style: const TextStyle(fontSize: 16)),
               onPressed: () {
-                context.read<AuthCubit>().login();
+                context.read<AuthCubit>().login().then((value) {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                        builder: (context) => const RouterScreen()),
+                  );
+                });
               }),
           const SizedBox(height: 25),
           Row(
@@ -111,9 +117,12 @@ class _LoadedForm extends StatelessWidget {
                 ],
               ),
               onPressed: () {
-                (state.screenType == ScreenType.signIn)
-                    ? context.read<AuthCubit>().signInWithGoogle()
-                    : context.read<AuthCubit>().signInWithGoogle();
+                context.read<AuthCubit>().signInWithGoogle().then((value) {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                        builder: (context) => const RouterScreen()),
+                  );
+                });
               }),
         ],
       ),
